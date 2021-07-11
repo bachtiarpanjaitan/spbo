@@ -45,6 +45,8 @@ class QuizController extends BaseController
         if(!empty($topic))
         {
             $quiz->topic_id = $topic->id;
+        }else {
+            return redirect()->back();
         }
     	$quiz->created_by = Auth::user()->id;
     	$quiz->maximum_quiz = $data['maximum_quiz'];

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jul 10, 2021 at 07:53 PM
--- Server version: 10.2.38-MariaDB-cll-lve
--- PHP Version: 7.3.28
+-- Host: 127.0.0.1:3308
+-- Generation Time: Jul 11, 2021 at 01:23 PM
+-- Server version: 8.0.18
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `batw5179_spbota`
+-- Database: `spbo_ta`
 --
 
 -- --------------------------------------------------------
@@ -28,17 +28,19 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin_menu`
 --
 
-CREATE TABLE `admin_menu` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(11) NOT NULL DEFAULT 0,
-  `order` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uri` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `permission` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `admin_menu`;
+CREATE TABLE IF NOT EXISTS `admin_menu` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `order` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_menu`
@@ -46,24 +48,26 @@ CREATE TABLE `admin_menu` (
 
 INSERT INTO `admin_menu` (`id`, `parent_id`, `order`, `title`, `icon`, `uri`, `permission`, `created_at`, `updated_at`) VALUES
 (1, 0, 1, 'Dashboard', 'fa-bar-chart', '/', NULL, NULL, '2020-08-06 07:25:00'),
-(2, 0, 8, 'Admin', 'fa-tasks', '', NULL, NULL, '2020-08-07 09:15:59'),
-(3, 2, 9, 'Users', 'fa-users', 'auth/users', NULL, NULL, '2020-08-07 09:15:59'),
-(4, 2, 10, 'Roles', 'fa-user', 'auth/roles', NULL, NULL, '2020-08-07 09:15:59'),
-(5, 2, 11, 'Permission', 'fa-ban', 'auth/permissions', NULL, NULL, '2020-08-07 09:15:59'),
-(6, 2, 12, 'Menu', 'fa-bars', 'auth/menu', NULL, NULL, '2020-08-07 09:15:59'),
-(7, 2, 13, 'Operation log', 'fa-history', 'auth/logs', NULL, NULL, '2020-08-07 09:15:59'),
+(2, 0, 11, 'Admin', 'fa-tasks', '', NULL, NULL, '2021-06-19 11:13:04'),
+(3, 2, 12, 'Users', 'fa-users', 'auth/users', NULL, NULL, '2021-06-19 11:13:04'),
+(4, 2, 13, 'Roles', 'fa-user', 'auth/roles', NULL, NULL, '2021-06-19 11:13:04'),
+(5, 2, 14, 'Permission', 'fa-ban', 'auth/permissions', NULL, NULL, '2021-06-19 11:13:04'),
+(6, 2, 15, 'Menu', 'fa-bars', 'auth/menu', NULL, NULL, '2021-06-19 11:13:04'),
+(7, 2, 16, 'Operation log', 'fa-history', 'auth/logs', NULL, NULL, '2021-06-19 11:13:04'),
 (8, 0, 2, 'Manage Peserta Didik', 'fa-users', NULL, '*', '2020-08-06 07:24:32', '2020-08-06 07:25:19'),
-(16, 8, 5, 'Daftar Kelas', 'fa-group', 'classes', '*', '2020-08-06 11:15:24', '2020-08-07 09:11:48'),
-(10, 0, 14, 'Helpers', 'fa-gears', '', NULL, '2020-08-06 07:45:20', '2020-08-07 09:15:59'),
-(11, 10, 15, 'Scaffold', 'fa-keyboard-o', 'helpers/scaffold', NULL, '2020-08-06 07:45:20', '2020-08-07 09:15:59'),
-(12, 10, 16, 'Database terminal', 'fa-database', 'helpers/terminal/database', NULL, '2020-08-06 07:45:20', '2020-08-07 09:15:59'),
-(13, 10, 17, 'Laravel artisan', 'fa-terminal', 'helpers/terminal/artisan', NULL, '2020-08-06 07:45:20', '2020-08-07 09:15:59'),
-(14, 10, 18, 'Routes', 'fa-list-alt', 'helpers/routes', NULL, '2020-08-06 07:45:20', '2020-08-07 09:15:59'),
-(15, 8, 4, 'Daftar Peserta Didik', 'fa-group', 'participants', '*', '2020-08-06 08:23:00', '2020-08-07 09:11:48'),
-(17, 8, 3, 'Daftar Mentor', 'fa-bars', 'mentors', '*', '2020-08-07 05:43:47', '2020-08-07 09:11:48'),
-(18, 0, 7, 'Jadwal', 'fa-book', NULL, '*', '2020-08-07 09:11:35', '2020-08-07 09:15:59'),
-(19, 8, 6, 'Daftar Ruangan', 'fa-home', 'rooms', '*', '2020-08-07 09:12:58', '2020-08-07 09:16:26'),
-(20, 18, 0, 'Daftar Jadwal', 'fa-bars', 'schedules', '*', '2020-08-07 09:26:34', '2020-08-07 09:26:34');
+(16, 8, 7, 'Daftar Kelas', 'fa-group', 'classes', '*', '2020-08-06 11:15:24', '2021-06-19 11:13:04'),
+(10, 0, 17, 'Helpers', 'fa-gears', '', NULL, '2020-08-06 07:45:20', '2021-06-19 11:13:04'),
+(11, 10, 18, 'Scaffold', 'fa-keyboard-o', 'helpers/scaffold', NULL, '2020-08-06 07:45:20', '2021-06-19 11:13:04'),
+(12, 10, 19, 'Database terminal', 'fa-database', 'helpers/terminal/database', NULL, '2020-08-06 07:45:20', '2021-06-19 11:13:04'),
+(13, 10, 20, 'Laravel artisan', 'fa-terminal', 'helpers/terminal/artisan', NULL, '2020-08-06 07:45:20', '2021-06-19 11:13:04'),
+(14, 10, 21, 'Routes', 'fa-list-alt', 'helpers/routes', NULL, '2020-08-06 07:45:20', '2021-06-19 11:13:04'),
+(15, 8, 6, 'Daftar Peserta Didik', 'fa-group', 'participants', '*', '2020-08-06 08:23:00', '2021-06-19 11:13:04'),
+(17, 8, 5, 'Daftar Mentor', 'fa-bars', 'mentors', '*', '2020-08-07 05:43:47', '2021-06-19 11:13:04'),
+(18, 0, 9, 'Jadwal', 'fa-book', NULL, '*', '2020-08-07 09:11:35', '2021-06-19 11:13:04'),
+(19, 8, 8, 'Daftar Ruangan', 'fa-home', 'rooms', '*', '2020-08-07 09:12:58', '2021-06-19 11:13:04'),
+(20, 18, 10, 'Daftar Jadwal', 'fa-bars', 'schedules', '*', '2020-08-07 09:26:34', '2021-06-19 11:13:04'),
+(23, 8, 3, 'Matakuliah', 'fa-book', 'subjects', 'ext.helpers', '2021-06-19 04:42:28', '2021-06-19 11:13:04'),
+(24, 8, 4, 'Matakuliah Per Kelas', 'fa-cubes', 'subject-classes', '*', '2021-06-19 11:12:46', '2021-06-19 11:13:04');
 
 -- --------------------------------------------------------
 
@@ -71,16 +75,19 @@ INSERT INTO `admin_menu` (`id`, `parent_id`, `order`, `title`, `icon`, `uri`, `p
 -- Table structure for table `admin_operation_log`
 --
 
-CREATE TABLE `admin_operation_log` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `admin_operation_log`;
+CREATE TABLE IF NOT EXISTS `admin_operation_log` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `method` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `input` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `input` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `admin_operation_log_user_id_index` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_operation_log`
@@ -464,72 +471,147 @@ INSERT INTO `admin_operation_log` (`id`, `user_id`, `path`, `method`, `ip`, `inp
 (1038, 1, 'admin/participants', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-09-16 00:24:28', '2020-09-16 00:24:28'),
 (1039, 1, 'admin/schedules', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-09-16 00:24:43', '2020-09-16 00:24:43'),
 (1040, 1, 'admin/auth/users', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-09-16 00:24:54', '2020-09-16 00:24:54'),
-(1041, 1, 'admin', 'GET', '114.122.23.104', '[]', '2021-07-10 09:46:14', '2021-07-10 09:46:14'),
-(1042, 1, 'admin/schedules', 'GET', '114.122.23.104', '[]', '2021-07-10 09:46:58', '2021-07-10 09:46:58'),
-(1043, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:47:10', '2021-07-10 09:47:10'),
-(1044, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:47:10', '2021-07-10 09:47:10'),
-(1045, 1, 'admin/schedules', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:50:51', '2021-07-10 09:50:51'),
-(1046, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:51:18', '2021-07-10 09:51:18'),
-(1047, 1, 'admin/schedules', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:56:06', '2021-07-10 09:56:06'),
-(1048, 1, 'admin/auth/menu', 'GET', '114.122.23.104', '[]', '2021-07-10 09:57:36', '2021-07-10 09:57:36'),
-(1049, 1, 'admin', 'GET', '114.122.23.104', '[]', '2021-07-10 09:58:49', '2021-07-10 09:58:49'),
-(1050, 1, 'admin/schedules', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:59:02', '2021-07-10 09:59:02'),
-(1051, 1, 'admin/schedules/14', 'DELETE', '114.122.23.104', '{\"_method\":\"delete\",\"_token\":\"hovmUhiz1K7CFFsXGC479w8qDR0bZkDSST6IEZnN\"}', '2021-07-10 09:59:32', '2021-07-10 09:59:32'),
-(1052, 1, 'admin/schedules', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:59:33', '2021-07-10 09:59:33'),
-(1053, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 09:59:57', '2021-07-10 09:59:57'),
-(1054, 1, 'admin/schedules', 'POST', '114.122.23.104', '{\"name\":\"4\",\"room_id\":\"2\",\"class_id\":\"4\",\"subject_id\":\"8\",\"day\":\"2\",\"time\":\"13:00:00\",\"mentor_id\":\"4\",\"session_long\":\"60\",\"description\":null,\"_token\":\"hovmUhiz1K7CFFsXGC479w8qDR0bZkDSST6IEZnN\",\"after-save\":\"2\"}', '2021-07-10 10:01:46', '2021-07-10 10:01:46'),
-(1055, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '[]', '2021-07-10 10:01:46', '2021-07-10 10:01:46'),
-(1056, 1, 'admin/schedules', 'POST', '114.122.23.104', '{\"name\":\"4\",\"room_id\":\"2\",\"class_id\":\"4\",\"subject_id\":\"8\",\"day\":\"2\",\"time\":\"13:00:00\",\"mentor_id\":\"4\",\"session_long\":\"60\",\"description\":null,\"_token\":\"hovmUhiz1K7CFFsXGC479w8qDR0bZkDSST6IEZnN\",\"after-save\":\"2\"}', '2021-07-10 10:02:08', '2021-07-10 10:02:08'),
-(1057, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '[]', '2021-07-10 10:02:10', '2021-07-10 10:02:10'),
-(1058, 1, 'admin/schedules', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:03:08', '2021-07-10 10:03:08'),
-(1059, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:03:18', '2021-07-10 10:03:18'),
-(1060, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:03:18', '2021-07-10 10:03:18'),
-(1061, 1, 'admin/schedules', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:05:09', '2021-07-10 10:05:09'),
-(1062, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:07:11', '2021-07-10 10:07:11'),
-(1063, 1, 'admin/schedules/create', 'GET', '114.122.23.104', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:07:11', '2021-07-10 10:07:11'),
-(1064, 1, 'admin', 'GET', '114.125.57.192', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:44:18', '2021-07-10 10:44:18'),
-(1065, 1, 'admin', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:44:18', '2021-07-10 10:44:18'),
-(1066, 1, 'admin/schedules', 'GET', '114.125.57.192', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:44:24', '2021-07-10 10:44:24'),
-(1067, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:44:25', '2021-07-10 10:44:25'),
-(1068, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:44:43', '2021-07-10 10:44:43'),
-(1069, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:45:18', '2021-07-10 10:45:18'),
-(1070, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:45:59', '2021-07-10 10:45:59'),
-(1071, 1, 'admin/schedules', 'POST', '114.125.41.64', '{\"name\":\"5\",\"room_id\":\"2\",\"class_id\":\"4\",\"subject_id\":\"8\",\"day\":\"6\",\"time\":\"12:00:00\",\"mentor_id\":\"4\",\"session_long\":\"80\",\"description\":null,\"_token\":\"hovmUhiz1K7CFFsXGC479w8qDR0bZkDSST6IEZnN\",\"after-save\":\"2\",\"_previous_\":\"http:\\/\\/skripsi.bataxdev.com\\/spbo\\/public\\/admin\\/schedules\"}', '2021-07-10 10:48:49', '2021-07-10 10:48:49'),
-(1072, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '[]', '2021-07-10 10:48:50', '2021-07-10 10:48:50'),
-(1073, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:49:37', '2021-07-10 10:49:37'),
-(1074, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:49:39', '2021-07-10 10:49:39'),
-(1075, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:49:41', '2021-07-10 10:49:41'),
-(1076, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:49:43', '2021-07-10 10:49:43'),
-(1077, 1, 'admin', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:49:50', '2021-07-10 10:49:50'),
-(1078, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:49:59', '2021-07-10 10:49:59'),
-(1079, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:03', '2021-07-10 10:50:03'),
-(1080, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:03', '2021-07-10 10:50:03'),
-(1081, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:07', '2021-07-10 10:50:07'),
-(1082, 1, 'admin/schedules/create', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:09', '2021-07-10 10:50:09'),
-(1083, 1, 'admin/schedules/create', 'GET', '114.125.57.192', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:09', '2021-07-10 10:50:09'),
-(1084, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:10', '2021-07-10 10:50:10'),
-(1085, 1, 'admin/schedules', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:10', '2021-07-10 10:50:10'),
-(1086, 1, 'admin', 'GET', '114.125.41.64', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 10:50:11', '2021-07-10 10:50:11'),
-(1087, 1, 'admin', 'GET', '139.255.128.14', '[]', '2021-07-10 11:10:34', '2021-07-10 11:10:34'),
-(1088, 1, 'admin/schedules', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:10:50', '2021-07-10 11:10:50'),
-(1089, 1, 'admin/schedules/create', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:10:54', '2021-07-10 11:10:54'),
-(1090, 1, 'admin/schedules', 'POST', '139.255.128.14', '{\"name\":\"testing tambah matakuliah\",\"room_id\":\"1\",\"class_id\":\"4\",\"subject_id\":\"10\",\"day\":\"2\",\"time\":\"09:30:00\",\"mentor_id\":\"4\",\"session_long\":\"60\",\"description\":null,\"_token\":\"5H8oujb0Gy6UrZtwEoqO2FQIbwwODufPKNCzPdrk\",\"_previous_\":\"http:\\/\\/skripsi.bataxdev.com\\/spbo\\/public\\/admin\\/schedules\"}', '2021-07-10 11:11:36', '2021-07-10 11:11:36'),
-(1091, 1, 'admin/schedules/create', 'GET', '139.255.128.14', '[]', '2021-07-10 11:11:36', '2021-07-10 11:11:36'),
-(1092, 1, 'admin/auth/logout', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:20:14', '2021-07-10 11:20:14'),
-(1093, 1, 'admin', 'GET', '139.255.128.14', '[]', '2021-07-10 11:29:47', '2021-07-10 11:29:47'),
-(1094, 1, 'admin/schedules', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:29:52', '2021-07-10 11:29:52'),
-(1095, 1, 'admin/schedules/create', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:29:54', '2021-07-10 11:29:54'),
-(1096, 1, 'admin/schedules', 'POST', '139.255.128.14', '{\"name\":\"Administrator\",\"room_id\":\"1\",\"class_id\":\"1\",\"subject_id\":\"10\",\"day\":\"2\",\"time\":\"09:00:00\",\"mentor_id\":\"1\",\"session_long\":\"40\",\"description\":null,\"_token\":\"zj9XPeCT8suIAJ5XePzkjONSrwI4n6JwPsVCAl4R\",\"_previous_\":\"http:\\/\\/skripsi.bataxdev.com\\/spbo\\/public\\/admin\\/schedules\"}', '2021-07-10 11:30:09', '2021-07-10 11:30:09'),
-(1097, 1, 'admin/schedules/create', 'GET', '139.255.128.14', '[]', '2021-07-10 11:30:10', '2021-07-10 11:30:10'),
-(1098, 1, 'admin/schedules', 'POST', '139.255.128.14', '{\"name\":\"Administrator\",\"room_id\":\"1\",\"class_id\":\"1\",\"subject_id\":\"10\",\"day\":\"2\",\"time\":\"09:00:00\",\"mentor_id\":\"1\",\"session_long\":\"40\",\"description\":null,\"_token\":\"zj9XPeCT8suIAJ5XePzkjONSrwI4n6JwPsVCAl4R\"}', '2021-07-10 11:31:00', '2021-07-10 11:31:00'),
-(1099, 1, 'admin/schedules', 'GET', '139.255.128.14', '[]', '2021-07-10 11:31:00', '2021-07-10 11:31:00'),
-(1100, 1, 'admin/schedules/17/edit', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:31:14', '2021-07-10 11:31:14'),
-(1101, 1, 'admin/schedules', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:31:17', '2021-07-10 11:31:17'),
-(1102, 1, 'admin/classes', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:31:19', '2021-07-10 11:31:19'),
-(1103, 1, 'admin/participants', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:31:20', '2021-07-10 11:31:20'),
-(1104, 1, 'admin/schedules', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:31:26', '2021-07-10 11:31:26'),
-(1105, 1, 'admin/schedules/3,5,9,13,15,16,17', 'DELETE', '139.255.128.14', '{\"_method\":\"delete\",\"_token\":\"zj9XPeCT8suIAJ5XePzkjONSrwI4n6JwPsVCAl4R\"}', '2021-07-10 11:31:47', '2021-07-10 11:31:47'),
-(1106, 1, 'admin/schedules', 'GET', '139.255.128.14', '{\"_pjax\":\"#pjax-container\"}', '2021-07-10 11:31:47', '2021-07-10 11:31:47');
+(1041, 1, 'admin', 'GET', '::1', '[]', '2020-10-21 05:42:01', '2020-10-21 05:42:01'),
+(1042, 1, 'admin/mentors', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-10-21 05:42:12', '2020-10-21 05:42:12'),
+(1043, 1, 'admin/mentors/create', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-10-21 05:42:18', '2020-10-21 05:42:18'),
+(1044, 1, 'admin/mentors', 'POST', '::1', '{\"user_id\":\"6\",\"zoom_id\":null,\"zoom_firstname\":\"mentor2\",\"zoom_lastname\":null,\"zoom_type\":\"1\",\"is_mentor\":\"1\",\"_token\":\"ZpudyRqtZh26UfQBSG6rQaYTQWCyCp8RjDGHwdme\",\"_previous_\":\"http:\\/\\/localhost\\/spbo\\/public\\/admin\\/mentors\"}', '2020-10-21 05:42:36', '2020-10-21 05:42:36'),
+(1045, 1, 'admin/mentors', 'GET', '::1', '[]', '2020-10-21 05:42:37', '2020-10-21 05:42:37'),
+(1046, 1, 'admin', 'GET', '::1', '[]', '2020-11-14 13:09:08', '2020-11-14 13:09:08'),
+(1047, 1, 'admin', 'GET', '::1', '[]', '2020-11-14 13:17:07', '2020-11-14 13:17:07'),
+(1048, 1, 'admin/schedules', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-11-14 13:17:25', '2020-11-14 13:17:25'),
+(1049, 1, 'admin/schedules/create', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-11-14 13:18:13', '2020-11-14 13:18:13'),
+(1050, 1, 'admin/schedules', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-11-14 13:18:47', '2020-11-14 13:18:47'),
+(1051, 1, 'admin', 'GET', '127.0.0.1', '[]', '2021-06-19 04:18:20', '2021-06-19 04:18:20'),
+(1052, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:18:43', '2021-06-19 04:18:43'),
+(1053, 1, 'admin/auth/menu/10/edit', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:21:19', '2021-06-19 04:21:19'),
+(1054, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:21:27', '2021-06-19 04:21:27'),
+(1055, 1, 'admin/auth/menu', 'POST', '127.0.0.1', '{\"parent_id\":\"0\",\"title\":\"Matakuliah\",\"icon\":\"fa-book\",\"uri\":null,\"roles\":[null],\"permission\":null,\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 04:23:05', '2021-06-19 04:23:05'),
+(1056, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 04:23:05', '2021-06-19 04:23:05'),
+(1057, 1, 'admin/auth/menu', 'POST', '127.0.0.1', '{\"parent_id\":\"0\",\"title\":\"Matakuliah\",\"icon\":\"fa-book\",\"uri\":\"subjects\",\"roles\":[\"1\",null],\"permission\":\"auth.setting\",\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 04:26:06', '2021-06-19 04:26:06'),
+(1058, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 04:26:06', '2021-06-19 04:26:06'),
+(1059, 1, 'admin/auth/menu/21', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 04:26:22', '2021-06-19 04:26:22'),
+(1060, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:26:22', '2021-06-19 04:26:22'),
+(1061, 1, 'admin/auth/menu/22', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 04:26:27', '2021-06-19 04:26:27'),
+(1062, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:26:27', '2021-06-19 04:26:27'),
+(1063, 1, 'admin/auth/menu', 'POST', '127.0.0.1', '{\"parent_id\":\"8\",\"title\":\"Matakuliah\",\"icon\":\"fa-book\",\"uri\":\"subjects\",\"roles\":[\"1\",null],\"permission\":\"ext.helpers\",\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 04:42:27', '2021-06-19 04:42:27'),
+(1064, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 04:42:28', '2021-06-19 04:42:28'),
+(1065, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 04:43:26', '2021-06-19 04:43:26'),
+(1066, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:43:32', '2021-06-19 04:43:32'),
+(1067, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:43:54', '2021-06-19 04:43:54'),
+(1068, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"PKK-00001\",\"semester\":\"2\",\"sks\":\"3\",\"name\":\"Algoritma Pemrograman\",\"description\":null,\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 04:47:03', '2021-06-19 04:47:03'),
+(1069, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 04:47:03', '2021-06-19 04:47:03'),
+(1070, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:54:07', '2021-06-19 04:54:07'),
+(1071, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:56:40', '2021-06-19 04:56:40'),
+(1072, 1, 'admin/subjects/1', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 04:57:01', '2021-06-19 04:57:01'),
+(1073, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:57:01', '2021-06-19 04:57:01'),
+(1074, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:57:03', '2021-06-19 04:57:03'),
+(1075, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 04:57:13', '2021-06-19 04:57:13'),
+(1076, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 05:18:46', '2021-06-19 05:18:46'),
+(1077, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"PKK-00001\",\"semester\":\"1\",\"sks\":\"3\",\"name\":\"Algoritma Pemrograman\",\"description\":null,\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 05:19:09', '2021-06-19 05:19:09'),
+(1078, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 05:19:10', '2021-06-19 05:19:10'),
+(1079, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 05:19:29', '2021-06-19 05:19:29'),
+(1080, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 05:19:34', '2021-06-19 05:19:34'),
+(1081, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 05:19:38', '2021-06-19 05:19:38'),
+(1082, 1, 'admin/subjects/2', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\"}', '2021-06-19 05:19:45', '2021-06-19 05:19:45'),
+(1083, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 05:19:45', '2021-06-19 05:19:45'),
+(1084, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 05:19:49', '2021-06-19 05:19:49'),
+(1085, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"PKK-00001\",\"semester\":\"1\",\"sks\":\"3\",\"name\":\"Algoritma Pemrograman\",\"description\":null,\"_token\":\"jsRei2x0KAbAI6FQCHf3ZaDznCqIt9XODJX1AbHY\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 05:20:02', '2021-06-19 05:20:02'),
+(1086, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 05:20:03', '2021-06-19 05:20:03'),
+(1087, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 05:20:13', '2021-06-19 05:20:13'),
+(1088, 1, 'admin/subjects', 'GET', '127.0.0.1', '[]', '2021-06-19 07:53:24', '2021-06-19 07:53:24'),
+(1089, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 08:48:06', '2021-06-19 08:48:06'),
+(1090, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 08:48:57', '2021-06-19 08:48:57'),
+(1091, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 08:49:00', '2021-06-19 08:49:00'),
+(1092, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 08:49:03', '2021-06-19 08:49:03'),
+(1093, 1, 'admin/subjects/3/edit', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 08:49:07', '2021-06-19 08:49:07'),
+(1094, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 08:49:43', '2021-06-19 08:49:43'),
+(1095, 1, 'admin/classes', 'GET', '127.0.0.1', '[]', '2021-06-19 09:38:48', '2021-06-19 09:38:48'),
+(1096, 1, 'admin/classes/1/edit', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:38:57', '2021-06-19 09:38:57'),
+(1097, 1, 'admin/classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:39:05', '2021-06-19 09:39:05'),
+(1098, 1, 'admin', 'GET', '127.0.0.1', '[]', '2021-06-19 09:53:53', '2021-06-19 09:53:53'),
+(1099, 1, 'admin/schedules', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:53:58', '2021-06-19 09:53:58'),
+(1100, 1, 'admin/schedules/2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"TslYZheXtkCY7yga9kqgyC9Cce0igSb5gfdpQQWw\"}', '2021-06-19 09:54:14', '2021-06-19 09:54:14'),
+(1101, 1, 'admin/schedules', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:54:14', '2021-06-19 09:54:14'),
+(1102, 1, 'admin/schedules', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:55:45', '2021-06-19 09:55:45'),
+(1103, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:55:48', '2021-06-19 09:55:48'),
+(1104, 1, 'admin/schedules', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:56:01', '2021-06-19 09:56:01'),
+(1105, 1, 'admin/schedules/21/edit', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 09:56:08', '2021-06-19 09:56:08'),
+(1106, 1, 'admin/schedules', 'GET', '127.0.0.1', '[]', '2021-06-19 09:56:52', '2021-06-19 09:56:52'),
+(1107, 1, 'admin/participants', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 10:58:32', '2021-06-19 10:58:32'),
+(1108, 1, 'admin/participants/2/edit', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 10:58:50', '2021-06-19 10:58:50'),
+(1109, 1, 'admin/participants', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 10:58:57', '2021-06-19 10:58:57'),
+(1110, 1, 'admin/schedules/21/edit', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 10:58:57', '2021-06-19 10:58:57'),
+(1111, 1, 'admin/helpers/scaffold', 'GET', '127.0.0.1', '[]', '2021-06-19 11:07:06', '2021-06-19 11:07:06'),
+(1112, 1, 'admin/helpers/scaffold', 'POST', '127.0.0.1', '{\"table_name\":\"subject_classes\",\"model_name\":\"App\\\\Models\\\\SubjectClass\",\"controller_name\":\"App\\\\Admin\\\\Controllers\\\\SubjectClass\",\"create\":[\"migration\",\"controller\",\"migrate\"],\"fields\":[{\"name\":\"subject_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null},{\"name\":\"class_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null}],\"timestamps\":\"on\",\"primary_key\":\"id\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\"}', '2021-06-19 11:09:09', '2021-06-19 11:09:09'),
+(1113, 1, 'admin/helpers/scaffold', 'GET', '127.0.0.1', '[]', '2021-06-19 11:09:09', '2021-06-19 11:09:09'),
+(1114, 1, 'admin/helpers/scaffold', 'POST', '127.0.0.1', '{\"table_name\":\"subject_classes\",\"model_name\":\"App\\\\Models\\\\SubjectClass\",\"controller_name\":\"App\\\\Admin\\\\Controllers\\\\SubjectClassController\",\"create\":[\"migration\",\"controller\",\"migrate\"],\"fields\":[{\"name\":\"subject_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null},{\"name\":\"class_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null}],\"timestamps\":\"on\",\"primary_key\":\"id\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\"}', '2021-06-19 11:10:12', '2021-06-19 11:10:12'),
+(1115, 1, 'admin/helpers/scaffold', 'GET', '127.0.0.1', '[]', '2021-06-19 11:10:12', '2021-06-19 11:10:12'),
+(1116, 1, 'admin/helpers/scaffold', 'POST', '127.0.0.1', '{\"table_name\":\"subject_classes\",\"model_name\":\"App\\\\Models\\\\SubjectClass\",\"controller_name\":\"App\\\\Admin\\\\Controllers\\\\SubjectClassController\",\"create\":[\"migration\",\"model\",\"controller\"],\"fields\":[{\"name\":\"subject_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null},{\"name\":\"class_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null}],\"timestamps\":\"on\",\"primary_key\":\"id\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\"}', '2021-06-19 11:10:21', '2021-06-19 11:10:21'),
+(1117, 1, 'admin/helpers/scaffold', 'GET', '127.0.0.1', '[]', '2021-06-19 11:10:21', '2021-06-19 11:10:21'),
+(1118, 1, 'admin/helpers/scaffold', 'POST', '127.0.0.1', '{\"table_name\":\"subject_classes\",\"model_name\":\"App\\\\Models\\\\SubjectClass\",\"controller_name\":\"App\\\\Admin\\\\Controllers\\\\SubjectClassController\",\"create\":[\"migration\",\"controller\"],\"fields\":[{\"name\":\"subject_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null},{\"name\":\"class_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null}],\"timestamps\":\"on\",\"primary_key\":\"id\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\"}', '2021-06-19 11:10:30', '2021-06-19 11:10:30'),
+(1119, 1, 'admin/helpers/scaffold', 'GET', '127.0.0.1', '[]', '2021-06-19 11:10:30', '2021-06-19 11:10:30'),
+(1120, 1, 'admin/helpers/scaffold', 'POST', '127.0.0.1', '{\"table_name\":\"subject_classes\",\"model_name\":\"App\\\\Models\\\\SubjectClass\",\"controller_name\":\"App\\\\Admin\\\\Controllers\\\\SubjectClassController\",\"create\":[\"migration\"],\"fields\":[{\"name\":\"subject_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null},{\"name\":\"class_id\",\"type\":\"integer\",\"key\":\"index\",\"default\":null,\"comment\":null}],\"timestamps\":\"on\",\"primary_key\":\"id\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\"}', '2021-06-19 11:10:38', '2021-06-19 11:10:38'),
+(1121, 1, 'admin/helpers/scaffold', 'GET', '127.0.0.1', '[]', '2021-06-19 11:10:39', '2021-06-19 11:10:39'),
+(1122, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:11:59', '2021-06-19 11:11:59'),
+(1123, 1, 'admin/auth/menu', 'POST', '127.0.0.1', '{\"parent_id\":\"0\",\"title\":\"Matakuliah Per Kelas\",\"icon\":\"fa-cubes\",\"uri\":\"subject-classes\",\"roles\":[\"1\",null],\"permission\":\"*\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\"}', '2021-06-19 11:12:46', '2021-06-19 11:12:46'),
+(1124, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 11:12:46', '2021-06-19 11:12:46'),
+(1125, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 11:12:53', '2021-06-19 11:12:53'),
+(1126, 1, 'admin/auth/menu', 'POST', '127.0.0.1', '{\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\",\"_order\":\"[{\\\"id\\\":1},{\\\"id\\\":8,\\\"children\\\":[{\\\"id\\\":23},{\\\"id\\\":24},{\\\"id\\\":17},{\\\"id\\\":15},{\\\"id\\\":16},{\\\"id\\\":19}]},{\\\"id\\\":18,\\\"children\\\":[{\\\"id\\\":20}]},{\\\"id\\\":2,\\\"children\\\":[{\\\"id\\\":3},{\\\"id\\\":4},{\\\"id\\\":5},{\\\"id\\\":6},{\\\"id\\\":7}]},{\\\"id\\\":10,\\\"children\\\":[{\\\"id\\\":11},{\\\"id\\\":12},{\\\"id\\\":13},{\\\"id\\\":14}]}]\"}', '2021-06-19 11:13:04', '2021-06-19 11:13:04'),
+(1127, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:13:05', '2021-06-19 11:13:05'),
+(1128, 1, 'admin/auth/menu', 'GET', '127.0.0.1', '[]', '2021-06-19 11:13:10', '2021-06-19 11:13:10'),
+(1129, 1, 'admin/subject-classes', 'GET', '127.0.0.1', '[]', '2021-06-19 11:13:33', '2021-06-19 11:13:33'),
+(1130, 1, 'admin/subject-classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:13:37', '2021-06-19 11:13:37'),
+(1131, 1, 'admin/subject-classes/create', 'GET', '127.0.0.1', '[]', '2021-06-19 11:15:54', '2021-06-19 11:15:54'),
+(1132, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:22', '2021-06-19 11:24:22'),
+(1133, 1, 'admin/subject-classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:26', '2021-06-19 11:24:26'),
+(1134, 1, 'admin/subject-classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:29', '2021-06-19 11:24:29'),
+(1135, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:33', '2021-06-19 11:24:33'),
+(1136, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:36', '2021-06-19 11:24:36'),
+(1137, 1, 'admin/classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:41', '2021-06-19 11:24:41'),
+(1138, 1, 'admin/classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:43', '2021-06-19 11:24:43'),
+(1139, 1, 'admin/classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:24:46', '2021-06-19 11:24:46'),
+(1140, 1, 'admin/classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:25:09', '2021-06-19 11:25:09'),
+(1141, 1, 'admin/classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:25:11', '2021-06-19 11:25:11'),
+(1142, 1, 'admin/classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:25:41', '2021-06-19 11:25:41'),
+(1143, 1, 'admin/classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:29:52', '2021-06-19 11:29:52'),
+(1144, 1, 'admin/classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:30:01', '2021-06-19 11:30:01'),
+(1145, 1, 'admin/classes/create', 'GET', '127.0.0.1', '[]', '2021-06-19 11:33:27', '2021-06-19 11:33:27'),
+(1146, 1, 'admin/classes/create', 'GET', '127.0.0.1', '[]', '2021-06-19 11:33:44', '2021-06-19 11:33:44'),
+(1147, 1, 'admin/classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:35:03', '2021-06-19 11:35:03'),
+(1148, 1, 'admin/subject-classes', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:35:09', '2021-06-19 11:35:09'),
+(1149, 1, 'admin/subject-classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:35:11', '2021-06-19 11:35:11'),
+(1150, 1, 'admin/subject-classes', 'POST', '127.0.0.1', '{\"subject_id\":\"3\",\"class_id\":\"4\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subject-classes\"}', '2021-06-19 11:35:19', '2021-06-19 11:35:19'),
+(1151, 1, 'admin/subject-classes', 'GET', '127.0.0.1', '[]', '2021-06-19 11:35:20', '2021-06-19 11:35:20'),
+(1152, 1, 'admin/subject-classes/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 11:35:21', '2021-06-19 11:35:21'),
+(1153, 1, 'admin/subject-classes', 'POST', '127.0.0.1', '{\"subject_id\":\"3\",\"class_id\":\"1\",\"_token\":\"UnfX8wbemdU7YgnFH7DRfRCRls97SfDQo3G891CL\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subject-classes\"}', '2021-06-19 11:35:26', '2021-06-19 11:35:26'),
+(1154, 1, 'admin/subject-classes', 'GET', '127.0.0.1', '[]', '2021-06-19 11:35:27', '2021-06-19 11:35:27'),
+(1155, 1, 'admin', 'GET', '127.0.0.1', '[]', '2021-06-19 15:42:25', '2021-06-19 15:42:25'),
+(1156, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:42:41', '2021-06-19 15:42:41'),
+(1157, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:42:43', '2021-06-19 15:42:43'),
+(1158, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 15:43:03', '2021-06-19 15:43:03'),
+(1159, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 15:43:24', '2021-06-19 15:43:24'),
+(1160, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"12341234\",\"semester\":\"3\",\"sks\":\"2\",\"name\":\"1234\",\"description\":null,\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\"}', '2021-06-19 15:43:41', '2021-06-19 15:43:41'),
+(1161, 1, 'admin/subjects', 'GET', '127.0.0.1', '[]', '2021-06-19 15:44:04', '2021-06-19 15:44:04'),
+(1162, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:44:42', '2021-06-19 15:44:42'),
+(1163, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"asdfasdf\",\"semester\":\"2\",\"sks\":\"1\",\"name\":\"asdfasdf\",\"description\":null,\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 15:44:50', '2021-06-19 15:44:50'),
+(1164, 1, 'admin/subjects', 'GET', '127.0.0.1', '[]', '2021-06-19 15:45:35', '2021-06-19 15:45:35'),
+(1165, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:45:39', '2021-06-19 15:45:39'),
+(1166, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"sadfasdf\",\"semester\":\"1\",\"sks\":\"1\",\"name\":\"asdfasdf\",\"description\":null,\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 15:45:51', '2021-06-19 15:45:51'),
+(1167, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 15:45:52', '2021-06-19 15:45:52'),
+(1168, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:46:57', '2021-06-19 15:46:57'),
+(1169, 1, 'admin/subjects/4,5,6', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\"}', '2021-06-19 15:47:06', '2021-06-19 15:47:06'),
+(1170, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:47:06', '2021-06-19 15:47:06'),
+(1171, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:47:08', '2021-06-19 15:47:08'),
+(1172, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"qwerrqwer\",\"semester\":\"3\",\"sks\":\"2\",\"name\":\"qwerqwer\",\"description\":null,\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 15:47:16', '2021-06-19 15:47:16'),
+(1173, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '[]', '2021-06-19 15:47:16', '2021-06-19 15:47:16'),
+(1174, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:47:33', '2021-06-19 15:47:33'),
+(1175, 1, 'admin/subjects/7', 'DELETE', '127.0.0.1', '{\"_method\":\"delete\",\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\"}', '2021-06-19 15:47:40', '2021-06-19 15:47:40'),
+(1176, 1, 'admin/subjects', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:47:41', '2021-06-19 15:47:41'),
+(1177, 1, 'admin/subjects/create', 'GET', '127.0.0.1', '{\"_pjax\":\"#pjax-container\"}', '2021-06-19 15:47:43', '2021-06-19 15:47:43'),
+(1178, 1, 'admin/subjects', 'POST', '127.0.0.1', '{\"code\":\"werqwer\",\"semester\":\"3\",\"sks\":\"3\",\"name\":\"qwerqwer\",\"description\":null,\"_token\":\"EiVmVgfqrczyEQRh3TFnRdF5XJaqzQjdL5emvRQr\",\"_previous_\":\"http:\\/\\/localhost:8000\\/admin\\/subjects\"}', '2021-06-19 15:47:52', '2021-06-19 15:47:52'),
+(1179, 1, 'admin/subjects', 'GET', '127.0.0.1', '[]', '2021-06-19 15:47:53', '2021-06-19 15:47:53'),
+(1180, 1, 'admin/subjects', 'GET', '127.0.0.1', '[]', '2021-06-19 15:51:46', '2021-06-19 15:51:46'),
+(1181, 1, 'admin/subjects', 'GET', '127.0.0.1', '[]', '2021-06-19 16:38:22', '2021-06-19 16:38:22');
 
 -- --------------------------------------------------------
 
@@ -537,15 +619,19 @@ INSERT INTO `admin_operation_log` (`id`, `user_id`, `path`, `method`, `ip`, `inp
 -- Table structure for table `admin_permissions`
 --
 
-CREATE TABLE `admin_permissions` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `http_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `http_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `admin_permissions`;
+CREATE TABLE IF NOT EXISTS `admin_permissions` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `http_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `http_path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_permissions_name_unique` (`name`),
+  UNIQUE KEY `admin_permissions_slug_unique` (`slug`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_permissions`
@@ -565,13 +651,17 @@ INSERT INTO `admin_permissions` (`id`, `name`, `slug`, `http_method`, `http_path
 -- Table structure for table `admin_roles`
 --
 
-CREATE TABLE `admin_roles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `admin_roles`;
+CREATE TABLE IF NOT EXISTS `admin_roles` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_roles_name_unique` (`name`),
+  UNIQUE KEY `admin_roles_slug_unique` (`slug`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_roles`
@@ -586,11 +676,13 @@ INSERT INTO `admin_roles` (`id`, `name`, `slug`, `created_at`, `updated_at`) VAL
 -- Table structure for table `admin_role_menu`
 --
 
-CREATE TABLE `admin_role_menu` (
+DROP TABLE IF EXISTS `admin_role_menu`;
+CREATE TABLE IF NOT EXISTS `admin_role_menu` (
   `role_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `admin_role_menu_role_id_menu_id_index` (`role_id`,`menu_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -605,7 +697,9 @@ INSERT INTO `admin_role_menu` (`role_id`, `menu_id`, `created_at`, `updated_at`)
 (1, 17, NULL, NULL),
 (1, 18, NULL, NULL),
 (1, 19, NULL, NULL),
-(1, 20, NULL, NULL);
+(1, 20, NULL, NULL),
+(1, 23, NULL, NULL),
+(1, 24, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -613,11 +707,13 @@ INSERT INTO `admin_role_menu` (`role_id`, `menu_id`, `created_at`, `updated_at`)
 -- Table structure for table `admin_role_permissions`
 --
 
-CREATE TABLE `admin_role_permissions` (
+DROP TABLE IF EXISTS `admin_role_permissions`;
+CREATE TABLE IF NOT EXISTS `admin_role_permissions` (
   `role_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `admin_role_permissions_role_id_permission_id_index` (`role_id`,`permission_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -633,11 +729,13 @@ INSERT INTO `admin_role_permissions` (`role_id`, `permission_id`, `created_at`, 
 -- Table structure for table `admin_role_users`
 --
 
-CREATE TABLE `admin_role_users` (
+DROP TABLE IF EXISTS `admin_role_users`;
+CREATE TABLE IF NOT EXISTS `admin_role_users` (
   `role_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `admin_role_users_role_id_user_id_index` (`role_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -653,23 +751,26 @@ INSERT INTO `admin_role_users` (`role_id`, `user_id`, `created_at`, `updated_at`
 -- Table structure for table `admin_users`
 --
 
-CREATE TABLE `admin_users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `username` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `admin_users`;
+CREATE TABLE IF NOT EXISTS `admin_users` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_users_username_unique` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_users`
 --
 
 INSERT INTO `admin_users` (`id`, `username`, `password`, `name`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$10$.Am8AsDqUa8Xcv1IvEfVvO5xiRvWklqRnkegXA0GaDeF3/e71h3QK', 'Administrator', NULL, 'mcALRNIL9m6GMZ4ODS0NIFz5OkuAdlGlsPEMC29caFC9k45ymxisEYkMC1CW', '2020-08-05 02:57:32', '2020-08-05 02:57:32');
+(1, 'admin', '$2y$10$.Am8AsDqUa8Xcv1IvEfVvO5xiRvWklqRnkegXA0GaDeF3/e71h3QK', 'Administrator', NULL, '0zksOlxYWHwcd9lIEyhGOcCB3ix3wXxFro6COBEGTJXYIwyvbVQOsVeQlhnS', '2020-08-05 02:57:32', '2020-08-05 02:57:32');
 
 -- --------------------------------------------------------
 
@@ -677,11 +778,13 @@ INSERT INTO `admin_users` (`id`, `username`, `password`, `name`, `avatar`, `reme
 -- Table structure for table `admin_user_permissions`
 --
 
-CREATE TABLE `admin_user_permissions` (
+DROP TABLE IF EXISTS `admin_user_permissions`;
+CREATE TABLE IF NOT EXISTS `admin_user_permissions` (
   `user_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `admin_user_permissions_user_id_permission_id_index` (`user_id`,`permission_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -690,13 +793,15 @@ CREATE TABLE `admin_user_permissions` (
 -- Table structure for table `failed_jobs`
 --
 
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -705,11 +810,13 @@ CREATE TABLE `failed_jobs` (
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -730,7 +837,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2020_08_11_171110_create_tasks_table', 6),
 (19, '2020_08_12_110408_create_task_views_table', 10),
 (17, '2020_08_12_125322_create_user_information_table', 8),
-(18, '2020_10_15_141602_create_topics_table', 9);
+(18, '2020_10_15_141602_create_topics_table', 9),
+(20, '2020_11_18_024922_create_theories_table', 11),
+(21, '2020_11_18_030516_create_subjects_table', 11),
+(22, '2020_11_18_031721_create_subject_classes_table', 11),
+(23, '2020_12_21_120422_create_quizzes_table', 11),
+(24, '2020_12_21_134120_create_quiz_questions_table', 11),
+(25, '2020_12_25_163354_create_quiz_answers_table', 11);
 
 -- --------------------------------------------------------
 
@@ -738,31 +851,36 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `participants`
 --
 
-CREATE TABLE `participants` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `participants`;
+CREATE TABLE IF NOT EXISTS `participants` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `class_id` int(11) DEFAULT NULL,
-  `zoom_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'zoom user id',
-  `zoom_firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zoom_lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zoom_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zoom_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'zoom user id',
+  `zoom_firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zoom_lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zoom_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `zoom_type` int(11) NOT NULL,
   `is_mentor` tinyint(4) NOT NULL,
-  `live_status` tinyint(4) NOT NULL DEFAULT 0,
+  `live_status` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `participants_user_id_index` (`user_id`),
+  KEY `participants_class_id_index` (`class_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `participants`
 --
 
 INSERT INTO `participants` (`id`, `user_id`, `class_id`, `zoom_id`, `zoom_firstname`, `zoom_lastname`, `zoom_email`, `zoom_type`, `is_mentor`, `live_status`, `created_at`, `updated_at`) VALUES
-(1, 2, 4, '1233sfs', 'Siswa Update 2', 'Zoom', 'siswa1@gmail.com', 1, 0, 0, '2020-08-05 17:00:00', '2020-10-15 10:20:13'),
-(2, 3, 2, '187465', 'Siswa Dua', 'Zoom', NULL, 2, 0, 1, '2020-08-06 10:58:17', '2021-07-10 07:58:26'),
-(3, 4, NULL, '187465', 'Mardi Turnip, S.Kom, M.Kom', 'Satu', 'mentor@gmail.com', 2, 1, 1, '2020-08-06 10:58:17', '2021-07-10 11:28:46'),
+(1, 2, 4, '1233sfs', 'Siswa Update 2', 'Zoom', 'siswa1@gmail.com', 1, 0, 0, '2020-08-05 17:00:00', '2021-06-19 09:47:10'),
+(2, 3, 4, '187465', 'Siswa 2', 'Zoom', 'siswa2@gmail.com', 2, 0, 0, '2020-08-06 10:58:17', '2021-06-19 12:06:53'),
+(3, 4, NULL, '187465', 'Mardi Turnip, S.Kom, M.Kom', 'Satu', 'mentor@gmail.com', 2, 1, 1, '2020-08-06 10:58:17', '2021-06-19 15:41:53'),
 (4, 1, NULL, NULL, 'GURU Terlanjur', 'Mentor', 'guru@gmail.com', 1, 1, 0, '2020-08-12 06:42:23', '2020-08-12 07:39:41'),
-(6, 5, 1, NULL, 'Siswa 3', NULL, 'siswa3@gmail.com', 1, 0, 0, '2020-08-12 07:47:24', '2020-08-21 00:43:49');
+(6, 5, 1, NULL, 'Siswa 3', NULL, 'siswa3@gmail.com', 1, 0, 0, '2020-08-12 07:47:24', '2020-08-21 00:43:49'),
+(7, 6, NULL, NULL, 'mentor2', NULL, NULL, 1, 1, 0, '2020-10-21 05:42:37', '2020-10-21 05:42:58');
 
 -- --------------------------------------------------------
 
@@ -770,14 +888,16 @@ INSERT INTO `participants` (`id`, `user_id`, `class_id`, `zoom_id`, `zoom_firstn
 -- Table structure for table `participant_classes`
 --
 
-CREATE TABLE `participant_classes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `class_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `participant_classes`;
+CREATE TABLE IF NOT EXISTS `participant_classes` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `mentor_id` tinyint(4) DEFAULT NULL COMMENT 'user  id as mentor',
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `participant_classes`
@@ -795,13 +915,16 @@ INSERT INTO `participant_classes` (`id`, `class_name`, `mentor_id`, `description
 -- Table structure for table `participant_presents`
 --
 
-CREATE TABLE `participant_presents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `participant_presents`;
+CREATE TABLE IF NOT EXISTS `participant_presents` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `schedule_id` int(11) NOT NULL,
   `participant_id` int(11) NOT NULL,
   `datetime` datetime DEFAULT NULL,
-  `present` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `present` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `participant_presents_schedule_id_index` (`schedule_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `participant_presents`
@@ -814,11 +937,17 @@ INSERT INTO `participant_presents` (`id`, `schedule_id`, `participant_id`, `date
 (4, 4, 2, NULL, 0),
 (5, 2, 6, '2020-08-12 16:05:30', 0),
 (6, 7, 1, '2020-09-01 10:04:58', 0),
-(7, 10, 1, '2020-10-06 18:07:15', 1),
-(8, 12, 1, '2020-10-05 08:44:31', 0),
-(9, 6, 1, '2020-10-14 15:55:18', 1),
-(10, 8, 1, '2020-10-07 23:33:11', 1),
-(11, 16, 1, NULL, 0);
+(7, 10, 1, '2021-06-19 16:27:46', 1),
+(8, 12, 1, '2021-06-19 16:30:41', 1),
+(9, 6, 1, '2021-06-19 16:31:19', 1),
+(10, 8, 1, '2021-06-19 16:37:44', 1),
+(11, 16, 1, NULL, 0),
+(12, 19, 3, NULL, 0),
+(13, 19, 4, NULL, 0),
+(14, 19, 7, NULL, 0),
+(15, 20, 6, NULL, 0),
+(16, 21, 1, NULL, 0),
+(17, 21, 2, '2021-06-19 17:39:23', 1);
 
 -- --------------------------------------------------------
 
@@ -826,17 +955,18 @@ INSERT INTO `participant_presents` (`id`, `schedule_id`, `participant_id`, `date
 -- Stand-in structure for view `participant_present_views`
 -- (See below for the actual view)
 --
-CREATE TABLE `participant_present_views` (
-`id` bigint(20) unsigned
-,`schedule_id` int(11)
+DROP VIEW IF EXISTS `participant_present_views`;
+CREATE TABLE IF NOT EXISTS `participant_present_views` (
+`datetime` datetime
+,`email` varchar(100)
+,`id` bigint(20) unsigned
+,`mentor_id` int(11)
 ,`participant_id` int(11)
-,`datetime` datetime
 ,`present` tinyint(4)
+,`schedule_id` int(11)
+,`schedule_name` varchar(255)
 ,`user_id` int(11)
 ,`user_name` varchar(100)
-,`email` varchar(100)
-,`schedule_name` varchar(255)
-,`mentor_id` int(11)
 );
 
 -- --------------------------------------------------------
@@ -845,10 +975,12 @@ CREATE TABLE `participant_present_views` (
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`(250))
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -857,25 +989,30 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `quizzes`
 --
 
-CREATE TABLE `quizzes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `quizzes`;
+CREATE TABLE IF NOT EXISTS `quizzes` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subject_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
-  `maximum_quiz` int(11) NOT NULL DEFAULT 50,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `maximum_quiz` int(11) NOT NULL DEFAULT '50',
+  `description` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `quizzes_subject_id_index` (`subject_id`),
+  KEY `quizzes_topic_id_index` (`topic_id`),
+  KEY `quizzes_created_by_index` (`created_by`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `quizzes`
 --
 
 INSERT INTO `quizzes` (`id`, `title`, `subject_id`, `topic_id`, `created_by`, `maximum_quiz`, `description`, `created_at`, `updated_at`) VALUES
-(11, '12.1 Pre Test', 9, 60, 4, 5, 'Sistem Terdistribusi', '2021-06-20 14:32:21', '2021-06-20 14:32:21'),
-(10, 'Test', 8, 33, 4, 10, NULL, '2021-06-20 01:17:05', '2021-06-20 01:17:05');
+(7, 'test', 8, 26, 4, 10, 'testtt', '2021-06-19 15:51:20', '2021-06-19 15:51:20'),
+(6, 'Test', 3, 1, 4, 5, NULL, '2021-06-19 09:48:24', '2021-06-19 09:48:24');
 
 -- --------------------------------------------------------
 
@@ -883,14 +1020,29 @@ INSERT INTO `quizzes` (`id`, `title`, `subject_id`, `topic_id`, `created_by`, `m
 -- Table structure for table `quiz_answers`
 --
 
-CREATE TABLE `quiz_answers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `quiz_answers`;
+CREATE TABLE IF NOT EXISTS `quiz_answers` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `answer` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `quiz_answers_question_id_index` (`question_id`),
+  KEY `quiz_answers_user_id_index` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `quiz_answers`
+--
+
+INSERT INTO `quiz_answers` (`id`, `question_id`, `user_id`, `answer`, `created_at`, `updated_at`) VALUES
+(1, 135, 4, 'A', NULL, NULL),
+(2, 134, 4, 'B', NULL, NULL),
+(3, 133, 4, 'C', NULL, NULL),
+(4, 132, 4, 'C', NULL, NULL),
+(5, 131, 4, 'D', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -898,9 +1050,10 @@ CREATE TABLE `quiz_answers` (
 -- Table structure for table `quiz_questions`
 --
 
-CREATE TABLE `quiz_questions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `question_type` tinyint(4) NOT NULL DEFAULT 1,
+DROP TABLE IF EXISTS `quiz_questions`;
+CREATE TABLE IF NOT EXISTS `quiz_questions` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `question_type` tinyint(4) NOT NULL DEFAULT '1',
   `quiz_id` int(11) NOT NULL,
   `question` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `option_a` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -908,29 +1061,31 @@ CREATE TABLE `quiz_questions` (
   `option_c` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `option_d` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `point` int(11) NOT NULL DEFAULT 1
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `point` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `quiz_questions_quiz_id_index` (`quiz_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `quiz_questions`
 --
 
 INSERT INTO `quiz_questions` (`id`, `question_type`, `quiz_id`, `question`, `option_a`, `option_b`, `option_c`, `option_d`, `answer`, `point`) VALUES
-(171, 1, 11, '', '', '', '', '', '', 1),
-(172, 1, 11, '', '', '', '', '', '', 1),
-(173, 1, 11, '', '', '', '', '', '', 1),
-(174, 1, 11, '', '', '', '', '', '', 1),
-(175, 1, 11, '', '', '', '', '', '', 1),
-(170, 1, 10, 'test1', 'a', 'b', NULL, NULL, 'A', 1),
-(169, 1, 10, 'test2', 'a', 'b', NULL, NULL, 'A', 1),
-(168, 1, 10, 'test3', 'a', 'b', NULL, NULL, 'A', 1),
-(167, 1, 10, 'test4', 'a', 'b', NULL, NULL, 'A', 1),
-(166, 1, 10, 'test5', 'a', 'b', NULL, NULL, 'A', 1),
-(165, 1, 10, 'test6', 'a', 'b', NULL, NULL, 'A', 1),
-(164, 1, 10, 'test7', 'a', 'b', NULL, NULL, 'A', 1),
-(163, 1, 10, 'test8', 'a', 'b', NULL, NULL, 'A', 1),
-(162, 1, 10, 'test9', 'a', 'b', NULL, NULL, 'A', 1),
-(161, 1, 10, 'test10', 'a', 'b', NULL, NULL, 'A', 1);
+(145, 1, 7, '', '', '', '', '', '', 1),
+(144, 1, 7, '', '', '', '', '', '', 1),
+(143, 1, 7, '', '', '', '', '', '', 1),
+(142, 1, 7, '', '', '', '', '', '', 1),
+(141, 1, 7, '', '', '', '', '', '', 1),
+(140, 1, 7, '', '', '', '', '', '', 1),
+(139, 1, 7, '', '', '', '', '', '', 1),
+(138, 1, 7, '', '', '', '', '', '', 1),
+(137, 1, 7, '', '', '', '', '', '', 1),
+(136, 1, 7, '', '', '', '', '', '', 1),
+(135, 1, 6, 'teset', 'a', 'b', 'c', 'd', 'A', 1),
+(134, 1, 6, 'agsdfhg', 'a', 'b', 'c', 'd', 'B', 1),
+(133, 1, 6, 'asryhaer dfsdfhfg', 'a', 'b', 'c', 'd', 'C', 1),
+(132, 1, 6, 'hthdrtgsacv sga', 'a', 'b', 'c', 'd', 'C', 1),
+(131, 1, 6, 'farirtadgads badg', 'a', 'b', 'c', 'd', 'D', 1);
 
 -- --------------------------------------------------------
 
@@ -938,27 +1093,29 @@ INSERT INTO `quiz_questions` (`id`, `question_type`, `quiz_id`, `question`, `opt
 -- Table structure for table `rooms`
 --
 
-CREATE TABLE `rooms` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `rooms`;
+CREATE TABLE IF NOT EXISTS `rooms` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `max_participant` int(11) NOT NULL,
-  `is_occupied` tinyint(4) NOT NULL DEFAULT 0,
+  `is_occupied` tinyint(4) NOT NULL DEFAULT '0',
   `occupied_by_id` int(11) DEFAULT NULL,
   `occupied_start` datetime DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `rooms`
 --
 
 INSERT INTO `rooms` (`id`, `name`, `max_participant`, `is_occupied`, `occupied_by_id`, `occupied_start`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'B11', 50, 1, 4, '2020-10-14 16:26:46', 'Test Ruangan', '2020-08-07 09:38:33', '2020-10-14 09:26:46'),
+(1, 'B11', 50, 0, NULL, NULL, 'Test Ruangan', '2020-08-07 09:38:33', '2021-06-19 10:37:59'),
 (2, 'A21', 50, 0, NULL, NULL, 'Test Room', '2020-08-09 06:49:11', '2020-10-14 08:56:47'),
 (3, 'S42', 50, 0, NULL, NULL, NULL, '2020-09-01 01:27:24', '2020-10-06 11:07:32'),
-(4, 'S41', 50, 1, 4, '2020-10-07 23:33:24', 'Delphi', '2020-09-01 02:12:06', '2020-10-07 16:33:24');
+(4, 'S41', 50, 1, 4, '2021-06-19 16:34:56', 'Delphi', '2020-09-01 02:12:06', '2021-06-19 09:34:56');
 
 -- --------------------------------------------------------
 
@@ -966,37 +1123,33 @@ INSERT INTO `rooms` (`id`, `name`, `max_participant`, `is_occupied`, `occupied_b
 -- Table structure for table `schedules`
 --
 
-CREATE TABLE `schedules` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `schedules`;
+CREATE TABLE IF NOT EXISTS `schedules` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `room_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `subject_id` int(11) DEFAULT NULL,
-  `room_api_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `room_url` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `room_privacy` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `room_api_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `room_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `room_privacy` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject_id` int(11) NOT NULL,
   `day` int(11) NOT NULL,
   `time` time DEFAULT NULL,
   `mentor_id` int(11) DEFAULT NULL,
   `session_long` int(11) DEFAULT NULL COMMENT 'lama waktu pertemuan',
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subject_id` (`subject_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedules` (`id`, `name`, `room_id`, `class_id`, `subject_id`, `room_api_id`, `room_url`, `room_privacy`, `day`, `time`, `mentor_id`, `session_long`, `description`, `created_at`, `updated_at`) VALUES
-(2, 'Jadwal Matematika A1', 1, 2, NULL, '2d934e6d-49d9-41c0-a3d5-eaa17e1fc582', 'https://spbo.daily.co/Jadwal-Matematika-A1', 'public', 3, '10:00:00', 4, 60, 'test room', '2020-08-07 10:21:27', '2020-08-12 09:04:28'),
-(4, 'Pengembangan DIri', 2, 1, NULL, NULL, NULL, NULL, 5, '10:30:00', 4, 60, 'test', '2020-08-12 04:57:52', '2020-09-01 01:56:46'),
-(6, 'Belajar Web', 2, 4, NULL, NULL, NULL, NULL, 3, '08:30:00', 4, 60, 'testing', '2020-08-31 03:59:22', '2020-10-14 08:56:47'),
-(7, 'Pemograman', 3, 4, NULL, NULL, NULL, NULL, 4, '10:00:00', 4, 80, 'Belajar Web', '2020-09-01 01:28:53', '2020-09-01 02:56:17'),
-(8, 'Delpi', 4, 4, NULL, NULL, NULL, NULL, 2, NULL, 4, 60, 'Belajar Delpi', '2020-09-01 02:14:11', '2020-10-06 15:34:49'),
-(10, 'Test Website', 3, 4, NULL, NULL, NULL, NULL, 4, '14:00:00', 4, 60, 'Belajar', '2020-09-16 00:19:52', '2020-10-06 11:07:32'),
-(11, 'Pemograman', 1, 1, NULL, NULL, NULL, NULL, 2, '15:31:00', 4, 80, NULL, '2020-09-17 00:32:23', '2020-09-17 00:32:23'),
-(12, 'Belajar PHP', 4, 4, NULL, NULL, NULL, NULL, 5, '13:44:00', 4, 50, 'Belajar', '2020-09-17 00:38:38', '2020-10-05 01:44:07');
+INSERT INTO `schedules` (`id`, `name`, `room_id`, `class_id`, `room_api_id`, `room_url`, `room_privacy`, `subject_id`, `day`, `time`, `mentor_id`, `session_long`, `description`, `created_at`, `updated_at`) VALUES
+(21, 'Test2', 1, 4, NULL, NULL, NULL, 3, 7, '17:50:00', 4, 1, NULL, '2021-06-19 09:50:31', '2021-06-19 10:37:59');
 
 -- --------------------------------------------------------
 
@@ -1004,31 +1157,32 @@ INSERT INTO `schedules` (`id`, `name`, `room_id`, `class_id`, `subject_id`, `roo
 -- Stand-in structure for view `schedule_views`
 -- (See below for the actual view)
 --
-CREATE TABLE `schedule_views` (
-`id` int(10) unsigned
-,`name` varchar(255)
-,`room_id` int(11)
-,`class_id` int(11)
-,`room_api_id` varchar(50)
-,`room_url` text
-,`room_privacy` varchar(10)
-,`day` int(11)
-,`time` time
-,`mentor_id` int(11)
-,`session_long` int(11)
-,`description` text
-,`created_at` timestamp
-,`updated_at` timestamp
+DROP VIEW IF EXISTS `schedule_views`;
+CREATE TABLE IF NOT EXISTS `schedule_views` (
+`class_id` int(11)
 ,`class_name` varchar(255)
-,`room_name` varchar(255)
-,`room_max_participant` int(11)
-,`room_description` text
+,`created_at` timestamp
+,`day` int(11)
+,`description` text
+,`id` int(10) unsigned
 ,`is_occupied` tinyint(4)
-,`occupied_by_id` int(11)
-,`occupied_start` datetime
-,`occupied_by_name` varchar(100)
-,`mentor_name` varchar(100)
 ,`mentor_email` varchar(100)
+,`mentor_id` int(11)
+,`mentor_name` varchar(100)
+,`name` varchar(255)
+,`occupied_by_id` int(11)
+,`occupied_by_name` varchar(100)
+,`occupied_start` datetime
+,`room_api_id` varchar(50)
+,`room_description` text
+,`room_id` int(11)
+,`room_max_participant` int(11)
+,`room_name` varchar(255)
+,`room_privacy` varchar(10)
+,`room_url` text
+,`session_long` int(11)
+,`time` time
+,`updated_at` timestamp
 );
 
 -- --------------------------------------------------------
@@ -1037,23 +1191,24 @@ CREATE TABLE `schedule_views` (
 -- Table structure for table `subjects`
 --
 
-CREATE TABLE `subjects` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `subjects`;
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `semester` int(11) NOT NULL,
   `sks` int(11) DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `description` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `subjects`
 --
 
 INSERT INTO `subjects` (`id`, `code`, `semester`, `sks`, `name`, `description`) VALUES
-(10, '4', 7, 10, 'Kewirausahaan', 'Kewirausahaan'),
-(9, '3', 7, 11, 'SIstem Terdistribusi', 'Sistem Terdistribusi'),
-(8, 'PKK-00001', 1, 2, 'Algoritma Pemrograman', NULL);
+(3, 'PKK-00001', 1, 3, 'Algoritma Pemrograman', NULL),
+(8, 'werqwer', 3, 3, 'qwerqwer', NULL);
 
 -- --------------------------------------------------------
 
@@ -1061,11 +1216,13 @@ INSERT INTO `subjects` (`id`, `code`, `semester`, `sks`, `name`, `description`) 
 -- Table structure for table `subject_classes`
 --
 
-CREATE TABLE `subject_classes` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `subject_classes`;
+CREATE TABLE IF NOT EXISTS `subject_classes` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `subject_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `class_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `subject_classes`
@@ -1081,18 +1238,20 @@ INSERT INTO `subject_classes` (`id`, `subject_id`, `class_id`) VALUES
 -- Table structure for table `tasks`
 --
 
-CREATE TABLE `tasks` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `schedule_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `topic_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `task` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `task` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tasks`
@@ -1105,7 +1264,8 @@ INSERT INTO `tasks` (`id`, `schedule_id`, `class_id`, `topic_id`, `name`, `task`
 (19, 6, NULL, 2, 'Tugas Belajar Web', '<p>qwerty</p>', NULL, 4, '2020-10-06 03:09:19', '2020-10-06 03:09:19'),
 (30, 16, NULL, 1, 'Tugas web php', '<p>guiz topic 2</p>', NULL, 4, '2020-10-14 09:33:40', '2020-10-14 09:33:40'),
 (31, 12, NULL, 3, 'Tugas Belajar PHP', '<p>ini tugas sekalian sama topic juga</p>', NULL, 4, '2020-10-15 10:14:26', '2020-10-15 10:14:26'),
-(32, 10, NULL, 5, 'Tugas Test Website', '<p>rtyytu wertyu tyu</p>', NULL, 4, '2020-10-15 10:24:45', '2020-10-15 10:24:45');
+(32, 10, NULL, 5, 'Tugas Test Website', '<p>rtyytu wertyu tyu</p>', NULL, 4, '2020-10-15 10:24:45', '2020-10-15 10:24:45'),
+(34, 18, NULL, 7, 'Tugas Kewirausahaan', '<p>Testing</p>', NULL, 4, '2020-11-09 15:32:29', '2020-11-09 15:32:29');
 
 -- --------------------------------------------------------
 
@@ -1113,23 +1273,24 @@ INSERT INTO `tasks` (`id`, `schedule_id`, `class_id`, `topic_id`, `name`, `task`
 -- Stand-in structure for view `task_views`
 -- (See below for the actual view)
 --
-CREATE TABLE `task_views` (
-`id` bigint(20) unsigned
-,`schedule_id` int(11)
-,`class_id` int(11)
-,`topic_id` int(11)
-,`name` varchar(255)
-,`task` text
-,`file` varchar(255)
-,`created_by` int(11)
-,`created_at` timestamp
-,`updated_at` timestamp
-,`room_id` int(11)
-,`schedule_class_id` int(11)
+DROP VIEW IF EXISTS `task_views`;
+CREATE TABLE IF NOT EXISTS `task_views` (
+`class_id` int(11)
 ,`class_name` varchar(255)
-,`schedule_name` varchar(255)
-,`room_name` varchar(255)
+,`created_at` timestamp
+,`created_by` int(11)
+,`file` varchar(255)
+,`id` bigint(20) unsigned
+,`name` varchar(255)
 ,`participant_class_name` varchar(255)
+,`room_id` int(11)
+,`room_name` varchar(255)
+,`schedule_class_id` int(11)
+,`schedule_id` int(11)
+,`schedule_name` varchar(255)
+,`task` longtext
+,`topic_id` int(11)
+,`updated_at` timestamp
 ,`user_name` varchar(100)
 );
 
@@ -1139,15 +1300,25 @@ CREATE TABLE `task_views` (
 -- Table structure for table `theories`
 --
 
-CREATE TABLE `theories` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `theories`;
+CREATE TABLE IF NOT EXISTS `theories` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `theories_topic_id_index` (`topic_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `theories`
+--
+
+INSERT INTO `theories` (`id`, `topic_id`, `name`, `content`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Test', '<p>qwerrwety</p>', 'test', '2021-06-19 09:25:54', '2021-06-19 09:25:54');
 
 -- --------------------------------------------------------
 
@@ -1155,22 +1326,54 @@ CREATE TABLE `theories` (
 -- Table structure for table `topics`
 --
 
-CREATE TABLE `topics` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `topics`;
+CREATE TABLE IF NOT EXISTS `topics` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `topic_index` int(11) DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `subject_id` (`subject_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `topics`
 --
 
-INSERT INTO `topics` (`id`, `name`, `description`) VALUES
-(1, 'TOPIC 1', 'lorem ipsum dolor sis asmet'),
-(2, 'TOPIC 2', 'Lorem Opsim'),
-(3, 'Testing Topic', 'Keterangan Topic'),
-(4, 'qwertyui', 'tdikyt uyf i7tfi 7tf'),
-(5, 'ertyuio', 'tyuioghj');
+INSERT INTO `topics` (`id`, `topic_index`, `name`, `subject_id`, `description`) VALUES
+(1, NULL, 'TOPIC 1', 3, 'lorem ipsum dolor sis asmet'),
+(2, NULL, 'TOPIC 2', 3, 'Lorem Opsim'),
+(3, NULL, 'TOPIC 3', 3, 'Keterangan Topic'),
+(4, NULL, 'TOPIC 4', 3, 'tdikyt uyf i7tfi 7tf'),
+(5, NULL, 'TOPIC 5', 3, 'tyuioghj'),
+(6, NULL, 'TOPIC 6', 3, 'sfasf'),
+(7, NULL, 'TOPIC 7', 3, 'keterangan topik'),
+(8, NULL, 'TOPIC 8', 3, 'keterangan topik'),
+(9, NULL, 'TOPIC 9', 3, 'keterangan topik'),
+(10, NULL, 'TOPIC 10', 3, 'keterangan topik'),
+(11, NULL, 'TOPIC 11', 3, 'lorem ipsum dolor sis asmet'),
+(12, NULL, 'TOPIC 12', 3, 'lorem ipsum dolor sis asmet'),
+(13, NULL, 'TOPIC 13', 3, 'keterangan topik'),
+(14, NULL, 'TOPIC 14', 3, 'keterangan topik'),
+(15, NULL, 'TOPIC 15', 3, 'keterangan topik'),
+(16, NULL, 'TOPIC 16', 3, 'keterangan topik'),
+(17, 1, 'Topic 1', 8, NULL),
+(18, 2, 'Topic 2', 8, NULL),
+(19, 3, 'Topic 3', 8, NULL),
+(20, 4, 'Topic 4', 8, NULL),
+(21, 5, 'Topic 5', 8, NULL),
+(22, 6, 'Topic 6', 8, NULL),
+(23, 7, 'Topic 7', 8, NULL),
+(24, 8, 'Topic 8', 8, NULL),
+(25, 9, 'Topic 9', 8, NULL),
+(26, 10, 'Topic 10', 8, NULL),
+(27, 11, 'Topic 11', 8, NULL),
+(28, 12, 'Topic 12', 8, NULL),
+(29, 13, 'Topic 13', 8, NULL),
+(30, 14, 'Topic 14', 8, NULL),
+(31, 15, 'Topic 15', 8, NULL),
+(32, 16, 'Topic 16', 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -1178,17 +1381,20 @@ INSERT INTO `topics` (`id`, `name`, `description`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` bigint(11) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nim` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nim` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -1197,9 +1403,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `nim`, `created_at`, `updated_at`) VALUES
 (1, 'GURU Terlanjur', 'guru@gmail.com', '2020-08-05 10:00:00', '$2y$10$1s0Vtl0D6k1ZkIQFKM0SaerBmhFxq1E1klXrtw4syp5KmjWj92aKC', NULL, '6984635411', '2020-08-05 10:00:00', '2020-08-12 00:41:10'),
 (2, 'Siswa Update 2', 'siswa1@gmail.com', '2020-08-05 10:00:00', '$2y$10$3ae41OJZu3iR7eF/djP0DehaeRghUiVkOSHeJ9EXkflRRZnFPFlie', NULL, '565555555675', '2020-08-05 10:00:00', '2020-09-01 01:59:19'),
-(3, 'Siswa 2', 'siswa2@gmail.com', '2020-08-06 10:00:00', '$2y$10$5yRF/5fwxiyhyK8.kgYatOReYQiXb.HLc1glUNqxQmdiCXBSfYBh2', NULL, NULL, '2020-08-06 10:00:00', NULL),
-(4, 'Mardi Turnip, S.Kom, M.Kom', 'mentor@gmail.com', '2020-08-06 10:00:00', '$2y$10$5yRF/5fwxiyhyK8.kgYatOReYQiXb.HLc1glUNqxQmdiCXBSfYBh2', NULL, '4451222', '2020-08-06 10:00:00', '2020-08-21 00:58:44'),
-(5, 'Siswa 3', 'siswa3@gmail.com', NULL, '$2y$10$3ae41OJZu3iR7eF/djP0DehaeRghUiVkOSHeJ9EXkflRRZnFPFlie', NULL, '6845254685', '2020-08-12 00:46:55', '2020-08-12 01:42:17');
+(3, 'Siswa 2', 'siswa2@gmail.com', '2020-08-06 10:00:00', '$2y$10$nT.gZ15mvCiSjLJsBHM3F.1/YNxA.hjZqaB1kO4endgnph8N7KFX6', NULL, '123412342134', '2020-08-06 10:00:00', '2021-06-19 09:54:45'),
+(4, 'Mardi Turnip, S.Kom, M.Kom', 'mentor@gmail.com', '2020-08-06 10:00:00', '$2y$10$3ae41OJZu3iR7eF/djP0DehaeRghUiVkOSHeJ9EXkflRRZnFPFlie', NULL, '4451222', '2020-08-06 10:00:00', '2020-08-21 00:58:44'),
+(5, 'Siswa 3', 'siswa3@gmail.com', NULL, '$2y$10$3ae41OJZu3iR7eF/djP0DehaeRghUiVkOSHeJ9EXkflRRZnFPFlie', NULL, '6845254685', '2020-08-12 00:46:55', '2020-08-12 01:42:17'),
+(6, 'mentor2', 'mentor2@gmail.com', NULL, '$2y$10$4p1lb.m32l.gv3KgR7tKO.oNp3/2q8LOq6QN/pMbbAE.1KGET2gv6', NULL, NULL, '2020-10-21 05:30:04', '2020-10-21 05:30:04');
 
 -- --------------------------------------------------------
 
@@ -1207,19 +1414,20 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Stand-in structure for view `user_informations`
 -- (See below for the actual view)
 --
-CREATE TABLE `user_informations` (
-`id` bigint(11) unsigned
-,`name` varchar(100)
+DROP VIEW IF EXISTS `user_informations`;
+CREATE TABLE IF NOT EXISTS `user_informations` (
+`class_id` int(11)
+,`class_name` varchar(255)
+,`created_at` timestamp
 ,`email` varchar(100)
 ,`email_verified_at` timestamp
+,`id` bigint(11) unsigned
+,`is_mentor` tinyint(4)
+,`name` varchar(100)
+,`nim` varchar(50)
 ,`password` varchar(200)
 ,`remember_token` varchar(100)
-,`nim` varchar(50)
-,`created_at` timestamp
 ,`updated_at` timestamp
-,`is_mentor` tinyint(4)
-,`class_id` int(11)
-,`class_name` varchar(255)
 );
 
 -- --------------------------------------------------------
@@ -1229,7 +1437,7 @@ CREATE TABLE `user_informations` (
 --
 DROP TABLE IF EXISTS `participant_present_views`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER VIEW `participant_present_views`  AS SELECT `participant_presents`.`id` AS `id`, `participant_presents`.`schedule_id` AS `schedule_id`, `participant_presents`.`participant_id` AS `participant_id`, `participant_presents`.`datetime` AS `datetime`, `participant_presents`.`present` AS `present`, `participants`.`user_id` AS `user_id`, `users`.`name` AS `user_name`, `users`.`email` AS `email`, `schedules`.`name` AS `schedule_name`, `schedules`.`mentor_id` AS `mentor_id` FROM (((`participant_presents` join `participants` on(`participants`.`id` = `participant_presents`.`participant_id`)) join `users` on(`users`.`id` = `participants`.`user_id`)) join `schedules` on(`schedules`.`id` = `participant_presents`.`schedule_id`)) ;
+CREATE VIEW `participant_present_views`  AS  select `participant_presents`.`id` AS `id`,`participant_presents`.`schedule_id` AS `schedule_id`,`participant_presents`.`participant_id` AS `participant_id`,`participant_presents`.`datetime` AS `datetime`,`participant_presents`.`present` AS `present`,`participants`.`user_id` AS `user_id`,`users`.`name` AS `user_name`,`users`.`email` AS `email`,`schedules`.`name` AS `schedule_name`,`schedules`.`mentor_id` AS `mentor_id` from (((`participant_presents` join `participants` on((`participants`.`id` = `participant_presents`.`participant_id`))) join `users` on((`users`.`id` = `participants`.`user_id`))) join `schedules` on((`schedules`.`id` = `participant_presents`.`schedule_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1238,7 +1446,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER V
 --
 DROP TABLE IF EXISTS `schedule_views`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER VIEW `schedule_views`  AS SELECT `schedules`.`id` AS `id`, `schedules`.`name` AS `name`, `schedules`.`room_id` AS `room_id`, `schedules`.`class_id` AS `class_id`, `schedules`.`room_api_id` AS `room_api_id`, `schedules`.`room_url` AS `room_url`, `schedules`.`room_privacy` AS `room_privacy`, `schedules`.`day` AS `day`, `schedules`.`time` AS `time`, `schedules`.`mentor_id` AS `mentor_id`, `schedules`.`session_long` AS `session_long`, `schedules`.`description` AS `description`, `schedules`.`created_at` AS `created_at`, `schedules`.`updated_at` AS `updated_at`, `participant_classes`.`class_name` AS `class_name`, `rooms`.`name` AS `room_name`, `rooms`.`max_participant` AS `room_max_participant`, `rooms`.`description` AS `room_description`, `rooms`.`is_occupied` AS `is_occupied`, `rooms`.`occupied_by_id` AS `occupied_by_id`, `rooms`.`occupied_start` AS `occupied_start`, `user_o`.`name` AS `occupied_by_name`, `users`.`name` AS `mentor_name`, `users`.`email` AS `mentor_email` FROM ((((`schedules` left join `participant_classes` on(`participant_classes`.`id` = `schedules`.`class_id`)) left join `rooms` on(`rooms`.`id` = `schedules`.`room_id`)) left join `users` `user_o` on(`user_o`.`id` = `rooms`.`occupied_by_id`)) left join `users` on(`users`.`id` = `schedules`.`mentor_id`)) ;
+CREATE VIEW `schedule_views`  AS  select `schedules`.`id` AS `id`,`schedules`.`name` AS `name`,`schedules`.`room_id` AS `room_id`,`schedules`.`class_id` AS `class_id`,`schedules`.`room_api_id` AS `room_api_id`,`schedules`.`room_url` AS `room_url`,`schedules`.`room_privacy` AS `room_privacy`,`schedules`.`day` AS `day`,`schedules`.`time` AS `time`,`schedules`.`mentor_id` AS `mentor_id`,`schedules`.`session_long` AS `session_long`,`schedules`.`description` AS `description`,`schedules`.`created_at` AS `created_at`,`schedules`.`updated_at` AS `updated_at`,`participant_classes`.`class_name` AS `class_name`,`rooms`.`name` AS `room_name`,`rooms`.`max_participant` AS `room_max_participant`,`rooms`.`description` AS `room_description`,`rooms`.`is_occupied` AS `is_occupied`,`rooms`.`occupied_by_id` AS `occupied_by_id`,`rooms`.`occupied_start` AS `occupied_start`,`user_o`.`name` AS `occupied_by_name`,`users`.`name` AS `mentor_name`,`users`.`email` AS `mentor_email` from ((((`schedules` left join `participant_classes` on((`participant_classes`.`id` = `schedules`.`class_id`))) left join `rooms` on((`rooms`.`id` = `schedules`.`room_id`))) left join `users` `user_o` on((`user_o`.`id` = `rooms`.`occupied_by_id`))) left join `users` on((`users`.`id` = `schedules`.`mentor_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1247,7 +1455,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER V
 --
 DROP TABLE IF EXISTS `task_views`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER VIEW `task_views`  AS SELECT `tasks`.`id` AS `id`, `tasks`.`schedule_id` AS `schedule_id`, `tasks`.`class_id` AS `class_id`, `tasks`.`topic_id` AS `topic_id`, `tasks`.`name` AS `name`, `tasks`.`task` AS `task`, `tasks`.`file` AS `file`, `tasks`.`created_by` AS `created_by`, `tasks`.`created_at` AS `created_at`, `tasks`.`updated_at` AS `updated_at`, `schedules`.`room_id` AS `room_id`, `schedules`.`class_id` AS `schedule_class_id`, `class`.`class_name` AS `class_name`, `schedules`.`name` AS `schedule_name`, `rooms`.`name` AS `room_name`, `participant_classes`.`class_name` AS `participant_class_name`, `users`.`name` AS `user_name` FROM (((((`tasks` left join `schedules` on(`schedules`.`id` = `tasks`.`schedule_id`)) left join `rooms` on(`rooms`.`id` = `schedules`.`room_id`)) left join `participant_classes` on(`participant_classes`.`id` = `schedules`.`class_id`)) left join `participant_classes` `class` on(`class`.`id` = `tasks`.`class_id`)) join `users` on(`users`.`id` = `tasks`.`created_by`)) ;
+CREATE VIEW `task_views`  AS  select `tasks`.`id` AS `id`,`tasks`.`schedule_id` AS `schedule_id`,`tasks`.`class_id` AS `class_id`,`tasks`.`topic_id` AS `topic_id`,`tasks`.`name` AS `name`,`tasks`.`task` AS `task`,`tasks`.`file` AS `file`,`tasks`.`created_by` AS `created_by`,`tasks`.`created_at` AS `created_at`,`tasks`.`updated_at` AS `updated_at`,`schedules`.`room_id` AS `room_id`,`schedules`.`class_id` AS `schedule_class_id`,`class`.`class_name` AS `class_name`,`schedules`.`name` AS `schedule_name`,`rooms`.`name` AS `room_name`,`participant_classes`.`class_name` AS `participant_class_name`,`users`.`name` AS `user_name` from (((((`tasks` left join `schedules` on((`schedules`.`id` = `tasks`.`schedule_id`))) left join `rooms` on((`rooms`.`id` = `schedules`.`room_id`))) left join `participant_classes` on((`participant_classes`.`id` = `schedules`.`class_id`))) left join `participant_classes` `class` on((`class`.`id` = `tasks`.`class_id`))) join `users` on((`users`.`id` = `tasks`.`created_by`))) ;
 
 -- --------------------------------------------------------
 
@@ -1256,235 +1464,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER V
 --
 DROP TABLE IF EXISTS `user_informations`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`batw5179`@`localhost` SQL SECURITY DEFINER VIEW `user_informations`  AS SELECT `users`.`id` AS `id`, `users`.`name` AS `name`, `users`.`email` AS `email`, `users`.`email_verified_at` AS `email_verified_at`, `users`.`password` AS `password`, `users`.`remember_token` AS `remember_token`, `users`.`nim` AS `nim`, `users`.`created_at` AS `created_at`, `users`.`updated_at` AS `updated_at`, `participants`.`is_mentor` AS `is_mentor`, `participants`.`class_id` AS `class_id`, `participant_classes`.`class_name` AS `class_name` FROM ((`users` join `participants` on(`participants`.`user_id` = `users`.`id`)) left join `participant_classes` on(`participant_classes`.`id` = `participants`.`class_id`)) ;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin_menu`
---
-ALTER TABLE `admin_menu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `admin_operation_log`
---
-ALTER TABLE `admin_operation_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `admin_operation_log_user_id_index` (`user_id`);
-
---
--- Indexes for table `admin_permissions`
---
-ALTER TABLE `admin_permissions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admin_permissions_name_unique` (`name`),
-  ADD UNIQUE KEY `admin_permissions_slug_unique` (`slug`);
-
---
--- Indexes for table `admin_roles`
---
-ALTER TABLE `admin_roles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admin_roles_name_unique` (`name`),
-  ADD UNIQUE KEY `admin_roles_slug_unique` (`slug`);
-
---
--- Indexes for table `admin_role_menu`
---
-ALTER TABLE `admin_role_menu`
-  ADD KEY `admin_role_menu_role_id_menu_id_index` (`role_id`,`menu_id`);
-
---
--- Indexes for table `admin_role_permissions`
---
-ALTER TABLE `admin_role_permissions`
-  ADD KEY `admin_role_permissions_role_id_permission_id_index` (`role_id`,`permission_id`);
-
---
--- Indexes for table `admin_role_users`
---
-ALTER TABLE `admin_role_users`
-  ADD KEY `admin_role_users_role_id_user_id_index` (`role_id`,`user_id`);
-
---
--- Indexes for table `admin_users`
---
-ALTER TABLE `admin_users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admin_users_username_unique` (`username`);
-
---
--- Indexes for table `admin_user_permissions`
---
-ALTER TABLE `admin_user_permissions`
-  ADD KEY `admin_user_permissions_user_id_permission_id_index` (`user_id`,`permission_id`);
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `participants`
---
-ALTER TABLE `participants`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `participants_user_id_index` (`user_id`),
-  ADD KEY `participants_class_id_index` (`class_id`);
-
---
--- Indexes for table `participant_classes`
---
-ALTER TABLE `participant_classes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `participant_presents`
---
-ALTER TABLE `participant_presents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `participant_presents_schedule_id_index` (`schedule_id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`(250));
-
---
--- Indexes for table `rooms`
---
-ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `schedules`
---
-ALTER TABLE `schedules`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tasks`
---
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `topics`
---
-ALTER TABLE `topics`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`) USING HASH;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin_menu`
---
-ALTER TABLE `admin_menu`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `admin_operation_log`
---
-ALTER TABLE `admin_operation_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1107;
-
---
--- AUTO_INCREMENT for table `admin_permissions`
---
-ALTER TABLE `admin_permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `admin_roles`
---
-ALTER TABLE `admin_roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `admin_users`
---
-ALTER TABLE `admin_users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `participants`
---
-ALTER TABLE `participants`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `participant_classes`
---
-ALTER TABLE `participant_classes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `participant_presents`
---
-ALTER TABLE `participant_presents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `rooms`
---
-ALTER TABLE `rooms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `schedules`
---
-ALTER TABLE `schedules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `tasks`
---
-ALTER TABLE `tasks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT for table `topics`
---
-ALTER TABLE `topics`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+CREATE VIEW `user_informations`  AS  select `users`.`id` AS `id`,`users`.`name` AS `name`,`users`.`email` AS `email`,`users`.`email_verified_at` AS `email_verified_at`,`users`.`password` AS `password`,`users`.`remember_token` AS `remember_token`,`users`.`nim` AS `nim`,`users`.`created_at` AS `created_at`,`users`.`updated_at` AS `updated_at`,`participants`.`is_mentor` AS `is_mentor`,`participants`.`class_id` AS `class_id`,`participant_classes`.`class_name` AS `class_name` from ((`users` join `participants` on((`participants`.`user_id` = `users`.`id`))) left join `participant_classes` on((`participant_classes`.`id` = `participants`.`class_id`))) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
